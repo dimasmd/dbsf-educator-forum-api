@@ -28,6 +28,7 @@ const ThreadRepositoryPostgres = require('./repository/ThreadRepositoryPostgres'
 const AddThreadUseCase = require('../Applications/use_case/AddThreadUseCase');
 const CommentRepository = require('../Domains/comments/CommentRepository');
 const AddCommentUseCase = require('../Applications/use_case/AddCommentUseCase');
+const CommentRepositoryPostgres = require('./repository/CommentRepositoryPostgres');
 
 // creating container
 const container = createContainer();
@@ -97,7 +98,7 @@ container.register([
   },
   {
     key: CommentRepository.name,
-    Class: ThreadRepositoryPostgres,
+    Class: CommentRepositoryPostgres,
     parameter: {
       dependencies: [
         {
