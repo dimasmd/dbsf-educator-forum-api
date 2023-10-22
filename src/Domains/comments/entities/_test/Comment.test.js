@@ -21,7 +21,7 @@ describe('Comment entities', () => {
       username: 'dicoding',
       date: '2021-08-08T07:59:57.000Z',
       content: 'sebuah comment',
-      is_delete: 'false',
+      isDelete: 'false',
     };
 
     // Action and Assert
@@ -35,7 +35,7 @@ describe('Comment entities', () => {
       username: 'dicoding',
       date: '2021-08-08T07:59:57.000Z',
       content: 'sebuah comment',
-      is_delete: false,
+      isDelete: false,
     };
 
     // Action
@@ -55,7 +55,7 @@ describe('Comment entities', () => {
       username: 'dicoding',
       date: '2021-08-08T07:59:57.000Z',
       content: 'sebuah comment',
-      is_delete: true,
+      isDelete: true,
     };
 
     // Action
