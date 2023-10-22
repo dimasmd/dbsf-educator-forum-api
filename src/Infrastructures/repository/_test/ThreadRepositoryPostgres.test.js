@@ -42,4 +42,24 @@ describe('ThreadRepositoryPostgres', () => {
       expect(foundThread.date).toBeDefined();
     });
   });
+
+  describe('isThreadExist', () => {
+    it('should return true if thread exists', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({ id: 'user-123' });
+      await ThreadsTableTestHelper.addThread({ id: 'thread-123', owner: 'user-123' });
+      const repository = new ThreadRepositoryPostgres(pool, {});
+
+      // Action & Assert
+      await expect(repository.isThreadExist('thread-123')).resolves.toBe(true);
+    });
+
+    it('should return false if thread not exists', async () => {
+      // Arrange
+      const repository = new ThreadRepositoryPostgres(pool, {});
+
+      // Action & Assert
+      await expect(repository.isThreadExist('thread-123')).resolves.toBe(false);
+    });
+  });
 });
