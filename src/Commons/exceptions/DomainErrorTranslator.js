@@ -29,6 +29,7 @@ DomainErrorTranslator._directories = {
   'DELETE_COMMENT_USE_CASE.THREAD_NOT_FOUND': new NotFoundError('tidak dapat menghapus komentar karena thread tidak ditemukan'),
   'DELETE_COMMENT_USE_CASE.COMMENT_NOT_FOUND': new NotFoundError('tidak dapat menghapus komentar karena komentar tidak ditemukan'),
   'DELETE_COMMENT_USE_CASE.COMMENT_NOT_OWNED': new AuthorizationError('tidak dapat menghapus komentar karena Anda tidak memiliki akses'),
+  'GET_THREAD_USE_CASE.THREAD_NOT_FOUND': new NotFoundError('thread tidak ditemukan'),
 };
 
 module.exports = DomainErrorTranslator;
