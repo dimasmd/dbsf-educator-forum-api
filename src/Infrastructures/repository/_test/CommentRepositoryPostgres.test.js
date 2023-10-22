@@ -123,4 +123,26 @@ describe('CommentRepositoryPostgres', () => {
       expect(foundComment.is_delete).toEqual(true);
     });
   });
+
+  describe('getCommentByThreadId', () => {
+    it('should return comments correctly', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({ id: 'user-123' });
+      await ThreadsTableTestHelper.addThread({ id: 'thread-123' });
+      await CommentsTableTestHelper.addComment({ id: 'comment-123', threadId: 'thread-123' });
+      await CommentsTableTestHelper.addComment({ id: 'comment-456', threadId: 'thread-123' });
+      await CommentsTableTestHelper.addComment({ id: 'comment-789', threadId: 'thread-123' });
+
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+
+      // Action
+      const comments = await commentRepositoryPostgres.getCommentByThreadId('thread-123');
+
+      // Assert
+      expect(comments).toHaveLength(3);
+      expect(comments[0].id).toEqual('comment-123');
+      expect(comments[1].id).toEqual('comment-456');
+      expect(comments[2].id).toEqual('comment-789');
+    });
+  });
 });
