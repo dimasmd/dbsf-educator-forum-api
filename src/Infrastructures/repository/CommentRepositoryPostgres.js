@@ -21,6 +21,17 @@ class CommentRepositoryPostgres extends CommentRepository {
 
     return new AddedComment({ ...result.rows[0] });
   }
+
+  async isCommentExist(commentId) {
+    const query = {
+      text: 'SELECT id FROM comments WHERE id = $1',
+      values: [commentId],
+    };
+
+    const result = await this._pool.query(query);
+
+    return result.rowCount > 0;
+  }
 }
 
 module.exports = CommentRepositoryPostgres;

@@ -46,4 +46,31 @@ describe('CommentRepositoryPostgres', () => {
       expect(foundComment.date).toBeDefined();
     });
   });
+
+  describe('isCommentExist function', () => {
+    it('should return true if comment exists', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({ id: 'user-123' });
+      await ThreadsTableTestHelper.addThread({ id: 'thread-123' });
+      await CommentsTableTestHelper.addComment({ id: 'comment-123' });
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+
+      // Action
+      const isCommentExist = await commentRepositoryPostgres.isCommentExist('comment-123');
+
+      // Assert
+      expect(isCommentExist).toEqual(true);
+    });
+
+    it('should return false if comment not exists', async () => {
+      // Arrange
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+
+      // Action
+      const isCommentExist = await commentRepositoryPostgres.isCommentExist('comment-123');
+
+      // Assert
+      expect(isCommentExist).toEqual(false);
+    });
+  });
 });
