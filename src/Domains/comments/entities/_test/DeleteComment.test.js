@@ -16,6 +16,7 @@ describe('DeleteComment entities', () => {
     const payload = {
       id: 123,
       owner: true,
+      threadId: {},
     };
 
     // Action and Assert
@@ -27,6 +28,7 @@ describe('DeleteComment entities', () => {
     const payload = {
       id: 'comment-123',
       owner: 'user-123',
+      threadId: 'thread-123',
     };
 
     // Action
@@ -35,5 +37,6 @@ describe('DeleteComment entities', () => {
     // Assert
     expect(deleteComment.id).toEqual(payload.id);
     expect(deleteComment.owner).toEqual(payload.owner);
+    expect(deleteComment.threadId).toEqual(payload.threadId);
   });
 });
