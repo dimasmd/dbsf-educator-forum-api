@@ -105,4 +105,22 @@ describe('CommentRepositoryPostgres', () => {
       expect(isCommentOwner).toEqual(false);
     });
   });
+
+  describe('deleteComment', () => {
+    it('should update is_delete to true', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({ id: 'user-123' });
+      await ThreadsTableTestHelper.addThread({ id: 'thread-123' });
+      await CommentsTableTestHelper.addComment({ id: 'comment-123' });
+
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+
+      // Action
+      await commentRepositoryPostgres.deleteComment('comment-123');
+
+      // Assert
+      const foundComment = await CommentsTableTestHelper.findCommentById('comment-123');
+      expect(foundComment.is_delete).toEqual(true);
+    });
+  });
 });
