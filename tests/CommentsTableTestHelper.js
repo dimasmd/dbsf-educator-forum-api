@@ -11,6 +11,17 @@ const CommentsTableTestHelper = {
     return result.rows[0];
   },
 
+  async addComment({
+    id = 'comment-123', threadId = 'thread-123', content = 'some comment', userId = 'user-123',
+  }) {
+    const query = {
+      text: 'INSERT INTO comments VALUES($1, $2, $3, $4, $5, $6) RETURNING id',
+      values: [id, content, userId, threadId, false, new Date().toISOString()],
+    };
+
+    await pool.query(query);
+  },
+
   async cleanTable() {
     await pool.query('DELETE FROM comments WHERE TRUE');
   },
