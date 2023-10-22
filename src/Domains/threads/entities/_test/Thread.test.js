@@ -102,7 +102,7 @@ describe('Thread entities', () => {
         username: 'dicoding',
         date: '2021-08-08T07:59:18.807Z',
         content: 'sebuah comment',
-        is_delete: false,
+        isDelete: false,
       }),
     ];
 
