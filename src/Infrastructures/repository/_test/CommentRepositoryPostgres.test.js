@@ -124,7 +124,7 @@ describe('CommentRepositoryPostgres', () => {
     });
   });
 
-  describe('getCommentByThreadId', () => {
+  describe('getCommentsByThreadId', () => {
     it('should return comments correctly', async () => {
       // Arrange
       await UsersTableTestHelper.addUser({ id: 'user-123' });
@@ -136,7 +136,7 @@ describe('CommentRepositoryPostgres', () => {
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
       // Action
-      const comments = await commentRepositoryPostgres.getCommentByThreadId('thread-123');
+      const comments = await commentRepositoryPostgres.getCommentsByThreadId('thread-123');
 
       // Assert
       expect(comments).toHaveLength(3);
