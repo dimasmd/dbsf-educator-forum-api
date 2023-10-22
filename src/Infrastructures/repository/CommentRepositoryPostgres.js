@@ -32,6 +32,17 @@ class CommentRepositoryPostgres extends CommentRepository {
 
     return result.rowCount > 0;
   }
+
+  async isCommentOwner(commentId, owner) {
+    const query = {
+      text: 'SELECT owner FROM comments WHERE id = $1',
+      values: [commentId],
+    };
+
+    const result = await this._pool.query(query);
+
+    return result.rows[0].owner === owner;
+  }
 }
 
 module.exports = CommentRepositoryPostgres;

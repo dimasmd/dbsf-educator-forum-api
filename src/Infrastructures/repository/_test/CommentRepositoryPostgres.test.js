@@ -73,4 +73,36 @@ describe('CommentRepositoryPostgres', () => {
       expect(isCommentExist).toEqual(false);
     });
   });
+
+  describe('isCommentOwner function', () => {
+    it('should return true if user is comment owner', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({ id: 'user-123' });
+      await ThreadsTableTestHelper.addThread({ id: 'thread-123' });
+      await CommentsTableTestHelper.addComment({ id: 'comment-123', owner: 'user-123' });
+
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+
+      // Action
+      const isCommentOwner = await commentRepositoryPostgres.isCommentOwner('comment-123', 'user-123');
+
+      // Assert
+      expect(isCommentOwner).toEqual(true);
+    });
+
+    it('should return false if user is not comment owner', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({ id: 'user-123' });
+      await ThreadsTableTestHelper.addThread({ id: 'thread-123' });
+      await CommentsTableTestHelper.addComment({ id: 'comment-123', owner: 'user-123' });
+
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+
+      // Action
+      const isCommentOwner = await commentRepositoryPostgres.isCommentOwner('comment-123', 'user-456');
+
+      // Assert
+      expect(isCommentOwner).toEqual(false);
+    });
+  });
 });
