@@ -22,4 +22,4 @@ jobs:
             git pull origin master
             /home/${{ secrets.SSH_USER }}/.nvm/versions/node/v14.18.1/bin/npm install
             /home/${{ secrets.SSH_USER }}/.nvm/versions/node/v14.18.1/bin/npm run migrate up
-            /home/${{ secrets.SSH_USER }}/.nvm/versions/node/v14.18.1/bin/pm2 restart auth-api
+            /home/${{ secrets.SSH_USER }}/.nvm/versions/node/v14.18.1/bin/pm2 restart dbsf-educator-forum-api
