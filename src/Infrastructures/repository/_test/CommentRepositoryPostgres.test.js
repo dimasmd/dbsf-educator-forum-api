@@ -126,11 +126,17 @@ describe('CommentRepositoryPostgres', () => {
 
   describe('getCommentsByThreadId', () => {
     it('should return comments correctly', async () => {
+      const wait = (ms) => new Promise((resolve) => {
+        setTimeout(resolve, ms);
+      });
+
       // Arrange
       await UsersTableTestHelper.addUser({ id: 'user-123' });
       await ThreadsTableTestHelper.addThread({ id: 'thread-123' });
       await CommentsTableTestHelper.addComment({ id: 'comment-123', threadId: 'thread-123' });
+      await wait(250);
       await CommentsTableTestHelper.addComment({ id: 'comment-456', threadId: 'thread-123' });
+      await wait(250);
       await CommentsTableTestHelper.addComment({ id: 'comment-789', threadId: 'thread-123' });
 
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
