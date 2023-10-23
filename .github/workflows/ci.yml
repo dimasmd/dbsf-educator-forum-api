@@ -47,8 +47,8 @@ jobs:
           PGDATABASE: forumapi_test
           PGPASSWORD: testing
           PGPORT: 5432
-          ACCESS_TOKEN_KEY: secret
-          REFRESH_TOKEN_KEY: secret
+          ACCESS_TOKEN_KEY: access_token_key
+          REFRESH_TOKEN_KEY: refresh_token_key
           ACCESS_TOKEN_AGE: 3600
           HOST: localhost
           PORT: 5000
